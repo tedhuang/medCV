@@ -1,0 +1,41 @@
+{% extends "report/includes/base.html" %}
+
+
+{% block page_body %}
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">MedCV</a>
+        </div>
+    </div>
+</div>
+
+<div id="main-container" class="sidebar-closed">
+    <div id="charts">
+
+        <div class="sleep chart">
+          <div class="category-label">Sleep</div>
+          <div class="graph"></div>
+        </div>
+        <div class="medication chart">
+          <div class="category-label">Med</div>
+          <div class="graph"></div>
+        </div>
+        <div class="diagnoses chart">
+          <div class="category-label">Diagnoses</div>
+          <div class="graph"></div>
+        </div>
+        <div class="family chart">
+          <div class="category-label">Family</div>
+          <div class="graph"></div>
+        </div>
+    </div>
+    <div class="info">
+      <div class="category-label">Info</div>
+      <div class="timeline"></div>
+      <div class="events"></div>
+    </div>
+</div>
+
+{% endblock %}
+

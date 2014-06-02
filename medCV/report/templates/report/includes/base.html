@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="MedCV - Vancouver Hacking Health">
+		<meta name="author" content="Team24">
+
+		<title>MedCV</title>
+
+		<!-- Lib Style dependencies -->
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/report.css">
+		{% block page_head %}{% endblock %}
+	</head>
+
+
+	<body>
+		<!-- Main content -->
+		{% block page_body %}{% endblock %}
+
+		<!-- JS library dependencies
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<!-- Internal JS -->
+		<script src="{{STATIC_URL}}/js/report.js"></script>
+
+		{% block footer_js %}{% endblock %}
+
+		{% block page_foot %}{% endblock %}
+	</body>
+
+
+</html>
