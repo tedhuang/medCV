@@ -26,11 +26,11 @@ var  medCV = function () {
 
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
-
     }
 
     function drawGraph(placeholder, rawData){
         var min = rawData[0][0];
+        var max = rawData[rawData.length-1][0];
         $.each(rawData, function(i, data){
             data[0] = convertDateToTimestamp(data[0]);
         });
@@ -40,7 +40,7 @@ var  medCV = function () {
         var options ={
           xaxis: {
                 min: convertDateToTimestamp(min),
-                max: (new Date(2013, 11, 1)).getTime(),
+                max: convertDateToTimestamp(max),
                 mode: "time",
                 tickSize: [1, "year"],
 
