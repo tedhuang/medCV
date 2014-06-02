@@ -18,7 +18,6 @@ body {
 #charts{
    position:relative;
    height:80%;
-   background-color:#ccc;
 }
 
 .info{
@@ -32,39 +31,55 @@ body {
     height:25%;
 }
 
-.label{
+.category-label{
     position: relative;
     width:150px;
     height:100%;
-    border: 1px solid black;
     background-color: #ccc;
     float:left;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.category-label:hover{
+  background-color: #bbb;
 }
 
 .graph{
     position: relative;
     height:100%;
     float:right;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     background-color: white;
 }
 
-/**** background label ***/
-.sleep > .label {
-      background-image: url('../images/sleep.png');
+/**** background category-label ***/
+.chart > .category-label {
+  background-image: url('../images/sleep.png');
+  background-position: 50% 50%;
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 
-.medication > .label {
-      background-image: url('../images/med.png');
+.sleep > .category-label {
+  background-image: url('../images/sleep.png');
 }
 
-.diagnoses > .label {
-      background-image: url('../images/diagnoses.png');
+.medication > .category-label {
+  background-image: url('../images/med.png');
 }
 
-.family > .label {
-      background-image: url('../images/family.png');
+.diagnoses > .category-label {
+  background-image: url('../images/diagnoses.png');
 }
-/*.info > .label {
+
+.family > .category-label {
+  background-image: url('../images/family.png');
+}
+/*.info > .category-label {
       background-image: url('/images/background.png');
 }*/
