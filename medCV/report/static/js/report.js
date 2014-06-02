@@ -26,6 +26,13 @@ var  medCV = function () {
 
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
+
+
+        // var med_taken = [["1999-05-01", "Foo"], ["1999-05-01", "Bar"], ["1999-05-01", "Baz"]
+        //                  ["2004-05-01", "Ruffle"],
+        //                  ["2009-05-01", "Rack"],
+        //                  ["2012-05-01", "Rackspace"], ["2012-05-01", "Jingle"]];
+        // drawNoteGraph("medication", med);
     }
 
     function drawGraph(placeholder, rawData){
@@ -74,6 +81,57 @@ var  medCV = function () {
         };
         var plot = $("."+placeholder+" > .graph").plot(data, options).data("plot");
 
+    }
+
+    function drawNoteGraph(placeholder, rawData) {
+        var min = rawData[0][0];
+        var options ={
+          xaxis: {
+                min: convertDateToTimestamp(min),
+                max: (new Date(2013, 11, 1)).getTime(),
+                mode: "time",
+                tickSize: [1, "year"],
+
+                tickLength: 0,
+                axisLabel: 'Month',
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            yaxis: {
+                min: 0,
+                max: 4,
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: true,
+                    steps: true
+                }
+            },
+            grid: {
+                borderWidth: 1
+            },
+            legend: {
+                labelBoxBorderColor: "none",
+                position: "right"
+            },
+            comment: {
+                show: true
+            },
+            comments: [
+                {x: convertDateToTimestamp("2003-02-01"), y: 1, contents: "Foo", color: "blue"},
+                {x: convertDateToTimestamp("2003-02-01"), y: 2, contents: "Foo", color: "blue"},
+                {x: convertDateToTimestamp("2004-02-01"), y: 1, contents: "Foo", color: "green"},
+                {x: convertDateToTimestamp("2006-02-01"), y: 1, contents: "Foo", color: "blue"}
+            ]
+        }
+        var plot = $("."+placeholder+" > .graph").plot(rawData, options).data("plot");
     }
 
     function convertDateToTimestamp(myDate){
