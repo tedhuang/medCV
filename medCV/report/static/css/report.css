@@ -1,0 +1,70 @@
+body {
+  font: 13px "Helvetica" !important;
+  padding-top: 100px;
+}
+
+#charts{
+
+}
+
+/* ---------- Layout ---------- */
+#main-container {
+    position: absolute;
+    top:50px; left:0; bottom: 0; right:0;
+    margin-top:2px;
+    overflow:hidden;
+}
+
+#charts{
+   position:relative;
+   height:80%;
+   background-color:#ccc;
+}
+
+.info{
+  position:relative;
+  height:20%;
+}
+
+.chart{
+    position: relative;
+    width:100%;
+    height:25%;
+}
+
+.label{
+    position: relative;
+    width:150px;
+    height:100%;
+    border: 1px solid black;
+    background-color: #ccc;
+    float:left;
+}
+
+.graph{
+    position: relative;
+    height:100%;
+    float:right;
+    border: 1px solid black;
+    background-color: white;
+}
+
+/**** background label ***/
+.sleep > .label {
+      background-image: url('../images/sleep.png');
+}
+
+.medication > .label {
+      background-image: url('../images/med.png');
+}
+
+.diagnoses > .label {
+      background-image: url('../images/diagnoses.png');
+}
+
+.family > .label {
+      background-image: url('../images/family.png');
+}
+/*.info > .label {
+      background-image: url('/images/background.png');
+}*/

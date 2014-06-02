@@ -2,8 +2,40 @@
 
 
 {% block page_body %}
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">MedCV</a>
+        </div>
+    </div>
+</div>
 
-hello world
+<div id="main-container" class="sidebar-closed">
+    <div id="charts">
+
+        <div class="sleep chart">
+          <div class="label">Sleep</div>
+          <div class="graph"></div>
+        </div>
+        <div class="medication chart">
+          <div class="label">Med</div>
+          <div class="graph"></div>
+        </div>
+        <div class="diagnoses chart">
+          <div class="label">Diagnosis</div>
+          <div class="graph"></div>
+        </div>
+        <div class="family chart">
+          <div class="label">Family</div>
+          <div class="graph"></div>
+        </div>
+    </div>
+    <div class="info">
+      <div class="label">Info</div>
+      <div class="timeline"></div>
+      <div class="events"></div>
+    </div>
+</div>
 
 
 {% endblock %}
