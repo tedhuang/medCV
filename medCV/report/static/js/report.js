@@ -254,26 +254,25 @@ var  medCV = function () {
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Supplements", color: "green"},
 
-                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Ritalin", color: "red"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Ritalin", color: "red"},
                 {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Seroquel", color: "blue"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Supplements", color: "green"},
 
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Risperdal", color: "blue"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Ritalin", color: "red"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Prozac", color: "black"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 5, contents: "Seroquel", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Risperdal", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Ritalin", color: "red"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 5, contents: "Prozac", color: "black"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Seroquel", color: "blue"},
                 // hidden because of too much data
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Abilify", color: "blue"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "red"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "orange"},
-
-                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Abilify", color: "blue"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Concerta", color: "red"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Lamictal", color: "orange"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
