@@ -45,32 +45,32 @@ var  medCV = function () {
         var sleep_detailed = [{
                 className: "bedtime",
                 name: "Difficulty Falling Asleep in Evening",
-                frequency: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]],
-                severity: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]]
+                frequency: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3], ["2014-06-01", 3]],
+                severity: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3], ["2014-06-01", 3]]
             },
             {
                 className: "sleepiness",
                 name: "Sleepiness during day",
-                frequency: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]],
-                severity: [["1999-05-01", 3], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 3]]
+                frequency: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4], ["2014-06-01", 4]],
+                severity: [["1999-05-01", 3], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 3], ["2014-06-01", 3]]
             },
             {
                 className: "awakenings",
                 name: "Awakenings",
-                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
-                severity: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 4], ["2012-05-01", 3]]
+                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4], ["2014-06-01", 4]],
+                severity: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 4], ["2012-05-01", 3], ["2014-06-01", 3]]
             },
             {
                 className: "timing",
                 name: "Timing : How irregular is your child's sleep?",
-                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
-                severity: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]]
+                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4], ["2014-06-01", 4]],
+                severity: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4], ["2014-06-01", 4]]
             },
             {
                 className: "breathing",
                 name: "Breathing: how much of a problem?",
-                frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2]],
-                severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3]]
+                frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2], ["2014-06-01", 2]],
+                severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3], ["2014-06-01", 3]]
             }
         ];
 
@@ -142,7 +142,7 @@ var  medCV = function () {
         d3.select("#sleep-overview")
           .append("svg").attr("width", 1091)
           .attr("height", 150)
-          .datum(sleep_data)
+          .datum([sleep_data])
           .call(sparkline);
 
         var chart = d3.timeline()
@@ -398,62 +398,89 @@ var  medCV = function () {
     }
 
     function drawDoubleLineGraph(data){
+        graphWidth = $("#diag-overview").parents(".graph").width() - 40
         var placeholder = data.className;
-        var rawData = data["frequency"];
-        var rawData2 = data["severity"];
-        var min = rawData[0][0];
-        var max = rawData[rawData.length-1][0];
-        $.each(rawData, function(i, data){
-            data[0] = convertDateToTimestamp(data[0]);
-        });
-        $.each(rawData2, function(i, data){
-            data[0] = convertDateToTimestamp(data[0]);
-        });
 
-        var options ={
-          xaxis: {
-                min: convertDateToTimestamp(min),
-                max: convertDateToTimestamp(max),
-                mode: "time",
-                tickSize: [1, "year"],
-                show:false,
-                tickLength: 0,
-                axisLabel: 'Month',
-                axisLabelUseCanvas: true,
-                axisLabelFontSizePixels: 12,
-                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
-            },
-            yaxis: {
-                show:false,
-                axisLabelUseCanvas: true,
-                axisLabelFontSizePixels: 12,
-                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
-            },
-            series: {
-                lines: {
-                    show: true,
-                    fill: false,
-                    steps: true
-                }
-            },
-            grid: {
-                borderWidth: 1
-            },
-            legend: {
-                labelBoxBorderColor: "none",
-                position: "left"
-            }
-        };
-        var plot = $.plot("."+placeholder, [], options);
+        var sparkline = d3.sparkline()
+            .beginning(minTime)
+            .ending(maxTime)
+            .showAxis()
+            .ymax(4)
+            .ymin(0)
+            .tickFormat({
+              format: d3.time.format("20%y"),
+              tickTime: d3.time.years,
+              tickInterval: 2,
+              tickSize: 2
+            })
 
-        plot.setData( [
-            { label: "frequency", data: rawData, color: '#4572A7' },
-            { label: "severity", data: rawData2,color: '#792dcc' }
-        ]);
-        plot.setupGrid();
-        plot.draw();
+        var sleep_data = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
+        sleep_data.forEach(function(e) { e[0] = convertDateToTimestamp(e[0]);});
+
+        data.frequency.forEach(function(x) { x[0] = convertDateToTimestamp(x[0])});
+        data.severity.forEach(function(x) { x[0] = convertDateToTimestamp(x[0])});
+
+        d3.select("."+data.className)
+          .append("svg").attr("width", graphWidth)
+          .attr("height", 100)
+          .datum([data.frequency, data.severity])
+          .call(sparkline);
+
+        // var rawData = data["frequency"];
+        // var rawData2 = data["severity"];
+        // var min = rawData[0][0];
+        // var max = rawData[rawData.length-1][0];
+        // $.each(rawData, function(i, data){
+        //     data[0] = convertDateToTimestamp(data[0]);
+        // });
+        // $.each(rawData2, function(i, data){
+        //     data[0] = convertDateToTimestamp(data[0]);
+        // });
+
+        // var options ={
+        //   xaxis: {
+        //         min: convertDateToTimestamp(min),
+        //         max: convertDateToTimestamp(max),
+        //         mode: "time",
+        //         tickSize: [1, "year"],
+        //         show:false,
+        //         tickLength: 0,
+        //         axisLabel: 'Month',
+        //         axisLabelUseCanvas: true,
+        //         axisLabelFontSizePixels: 12,
+        //         axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+        //         axisLabelPadding: 5
+        //     },
+        //     yaxis: {
+        //         show:false,
+        //         axisLabelUseCanvas: true,
+        //         axisLabelFontSizePixels: 12,
+        //         axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+        //         axisLabelPadding: 5
+        //     },
+        //     series: {
+        //         lines: {
+        //             show: true,
+        //             fill: false,
+        //             steps: true
+        //         }
+        //     },
+        //     grid: {
+        //         borderWidth: 1
+        //     },
+        //     legend: {
+        //         labelBoxBorderColor: "none",
+        //         position: "left"
+        //     }
+        // };
+        // var plot = $.plot("."+placeholder, [], options);
+
+        // plot.setData( [
+        //     { label: "frequency", data: rawData, color: '#4572A7' },
+        //     { label: "severity", data: rawData2,color: '#792dcc' }
+        // ]);
+        // plot.setupGrid();
+        // plot.draw();
     }
 
     function convertDateToTimestamp(myDate){

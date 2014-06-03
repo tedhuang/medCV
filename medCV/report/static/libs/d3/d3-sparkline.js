@@ -12,6 +12,7 @@
         margin = {left: 30, right:30, top: 5, bottom:30},
         itemHeight = 5,
         itemMargin = 3,
+        showAxis = true,
         tickFormat = { format: d3.time.format("%I %p"),
         tickTime: d3.time.hours,
         tickInterval: 1,
@@ -41,23 +42,28 @@
         .ticks(tickFormat.tickTime, tickFormat.tickInterval)
         .tickSize(tickFormat.tickSize);
 
-      g.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(" + 0 +","+(margin.top+height)+")")
-        .call(xAxis);
-
+      if (showAxis) {
+        g.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + 0 +","+(margin.top+height)+")")
+          .call(xAxis);
+      }
 
       var lineFunction = d3.svg.line()
           .interpolate("step-after")           // <=== THERE IT IS!
           .x(function(d) { return getXPos(d); })
           .y(function(d) { return getYPos(d); });
 
+      var colors = ["blue", "yellow"];
+
       g.each(function(d) {
-        g.append("path")
-         .attr("d", lineFunction(d))
-         .attr("stroke", "blue")
-         .attr("stroke-width", 2)
-         .attr("fill", "none");
+        d.forEach(function(datum, i) {
+          g.append("path")
+           .attr("d", lineFunction(datum))
+           .attr("stroke", colors[i])
+           .attr("stroke-width", 2)
+           .attr("fill", "none");
+        })
       });
 
       function getXPos(d) {
@@ -87,6 +93,20 @@
       return sparkline;
     };
 
+    sparkline.ymin = function(format) {
+      ymin = format;
+      return sparkline;
+    }
+
+    sparkline.ymax = function(format) {
+      ymax = format;
+      return sparkline;
+    }
+
+    sparkline.showAxis = function(show) {
+      showAxis = show;
+      return sparkline;
+    }
 
     return sparkline;
   }
