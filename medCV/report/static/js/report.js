@@ -114,7 +114,7 @@ var  medCV = function () {
               tickSize: 6
             })
             .itemHeight(20)
-            .itemMargin(5)
+            .itemMargin(1)
             .margin({top: 0, bottom: 0, left: 0, right: 0})
             .stack();
 
@@ -249,29 +249,22 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("1999-05-01"), y: 1, contents: "Herbs", color: "green"},
+                {x: convertDateToTimestamp("1999-05-13"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("1999-08-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Herbs", color: "green"},
+                {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
                 {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Herbs", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Herbs", color: "green"},
-
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Herbs", color: "green"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
 
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Herbs", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Community", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Medication", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Difficulties Related to Child's Disability", color: "black"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Relationship Difficulties", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Community Organization", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Relationship Difficulties in my family", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
@@ -296,7 +289,7 @@ var  medCV = function () {
             },
             yaxis: {
                 min: 0,
-                max: 6,
+                max: 7,
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
@@ -340,9 +333,9 @@ var  medCV = function () {
                 {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Catapres", color: "gray"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Abilify", color: "blue"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Concerta", color: "red"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Lamictal", color: "orange"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Lamictal", color: "orange"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Tradazone", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
@@ -371,6 +364,8 @@ var  medCV = function () {
             });
 
         });
+
+        $('.notch').toggle()
 
     });
 
