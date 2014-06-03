@@ -280,3 +280,9 @@ body {
   padding: 8px;
   display: inline-block;
 }
+
+.detail-info{
+    font-size: 2em;
+    margin-left: 40px;
+    color: #5b5e55;
+}
