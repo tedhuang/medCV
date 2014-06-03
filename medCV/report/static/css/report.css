@@ -71,6 +71,7 @@ body {
 .graph{
     height:100%;
     overflow:hidden;
+    position: relative;
 }
 .graph .overview{
   height:150px;
@@ -78,6 +79,13 @@ body {
 .graph .detailed{
   display:none;
   height:150px;
+}
+
+.graph .stripe-bg{
+  position: absolute;
+  top: 0;
+  left 0;
+  z-index:-1;
 }
 
 .detail-chart{
@@ -150,6 +158,7 @@ body {
 .family.chart{
   background-color: rgba(49, 75, 191, 0.2);
 }
+
 
 
 
