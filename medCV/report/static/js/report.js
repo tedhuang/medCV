@@ -19,6 +19,16 @@ var  medCV = function () {
         $(".graph").width(viewportWidth-labelWidth-5);
     });
 
+    var timeline_axis = d3.sparkline()
+        .beginning(minTime)
+        .ending(maxTime)
+        .tickFormat({
+          format: d3.time.format("20%y"),
+          tickTime: d3.time.years,
+          tickInterval: 2,
+          tickSize: 6
+        })
+
 
     function initialize(){
 
@@ -103,8 +113,11 @@ var  medCV = function () {
 
         // drawGraph("sleep", sleep);
         drawGraph("medication", med);
+        d3.select(".medication .graph").append("svg").attr("width", 1091).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
         drawNoteGraph("medication", med);
         drawFamilyGraph("family", med);
+        d3.select(".family .graph").append("svg").attr("width", 1091).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
+
         drawTimeline();
 
         var sparkline = d3.sparkline()
@@ -243,7 +256,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             yaxis: {
                 min: 0,
@@ -251,7 +265,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -261,7 +276,8 @@ var  medCV = function () {
                 }
             },
             grid: {
-                borderWidth: 1
+                borderWidth: 1,
+                show: false
             },
             legend: {
                 labelBoxBorderColor: "none",
@@ -271,8 +287,8 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-05-13"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("1999-08-01"), y: 1, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("1999-06-10"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("1999-08-25"), y: 1, contents: "Strong family bonds", color: "blue"},
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Other Family", color: "green"},
                 {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
@@ -307,7 +323,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             yaxis: {
                 min: 0,
@@ -315,7 +332,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -325,7 +343,8 @@ var  medCV = function () {
                 }
             },
             grid: {
-                borderWidth: 1
+                borderWidth: 1,
+                show: false
             },
             legend: {
                 labelBoxBorderColor: "none",
@@ -335,7 +354,7 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("1999-06-10"), y: 0, contents: "Supplements", color: "green"},
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Supplements", color: "green"},
 
