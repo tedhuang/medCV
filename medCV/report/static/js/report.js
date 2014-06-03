@@ -125,16 +125,12 @@ var  medCV = function () {
             .margin({top: 0, bottom: 0, left: 0, right: 0})
             .stack();
 
-<<<<<<< Updated upstream
-        d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
+		graphWidth = $("#diag-overview").parents(".graph").width() - 40
+        d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
         $.each(sleep_detailed, function(i, d){
             console.log("d: "+JSON.stringify(d));
             drawDoubleLineGraph(d);
         });
-=======
-        graphWidth = $("#diag-overview").parents(".graph").width() - 40
-        d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
->>>>>>> Stashed changes
     }
 
     function drawTimeline(){
