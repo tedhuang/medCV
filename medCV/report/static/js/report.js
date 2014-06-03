@@ -31,6 +31,9 @@ var  medCV = function () {
 
 
     function initialize(){
+        d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
         var footerHeight = $(window).height() - $(".info").position().top
         if (footerHeight < 150) {
@@ -77,7 +80,7 @@ var  medCV = function () {
                 className: "breathing",
                 name: "Breathing: how much of a problem?",
                 frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2], ["2014-06-01", 2]],
-                severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3], ["2014-06-01", 3]]
+                severity: [["1999-05-01", 1, "Bed Wet, Restless"], ["2004-05-01", 1, "Snoring"], ["2007-05-01", 2, "Bed wet"], ["2009-05-01", 3, "Restless"], ["2012-05-01", 3, "Snoring"], ["2014-06-01", 3, "Bed wet"]]
             }
         ];
 
@@ -126,7 +129,7 @@ var  medCV = function () {
 
         // drawGraph("sleep", sleep);
         graphWidth = $("#diag-overview").parents(".graph").width() - 40
-        
+
         drawGraph("medication", med);
         d3.select(".medication .graph").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
         drawNoteGraph("medication", med);
@@ -429,15 +432,33 @@ var  medCV = function () {
         var sparkline = d3.sparkline()
             .beginning(minTime)
             .ending(maxTime)
-            .showAxis()
+            .showAxis(false)
             .ymax(4)
             .ymin(0)
+            .margin({
+                top: 5,
+                bottom: 0,
+                left: 0,
+                right: 0
+            })
             .tickFormat({
               format: d3.time.format("20%y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
             })
+            .mouseover(function(d, i, datum, that,e) {
+                // $(that).append("rect")
+                //     .attr("width", 50)
+                //     .attr("height",20)
+                //     .attr("x",(d3.event.pageX)+"px")
+                //     .attr("y",(d3.event.pageY)+"px")
+                //     .append("text")
+                //     .data(d)
+                //     .attr("d", function(d){return "test";});
+                // $(that).tooltip();
+                console.log("foo"+d[i]);
+            });
 
         var sleep_data = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
         sleep_data.forEach(function(e) { e[0] = convertDateToTimestamp(e[0]);});

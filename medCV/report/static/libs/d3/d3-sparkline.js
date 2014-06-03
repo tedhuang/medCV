@@ -13,6 +13,7 @@
         itemHeight = 5,
         itemMargin = 3,
         showAxis = true,
+        mouseover = function() {},
         tickFormat = { format: d3.time.format("%I %p"),
         tickTime: d3.time.hours,
         tickInterval: 1,
@@ -54,7 +55,11 @@
           .x(function(d) { return getXPos(d); })
           .y(function(d) { return getYPos(d); });
 
-      var colors = ["blue", "yellow"];
+      // var circleFunction = d3.svg.circle()
+      //     .x(function(d) { return getXPos(d); })
+      //     .y(function(d) { return getYPos(d); });
+
+      var colors = ["blue", "purple"];
 
       g.each(function(d) {
         d.forEach(function(datum, i) {
@@ -63,6 +68,34 @@
            .attr("stroke", colors[i])
            .attr("stroke-width", 2)
            .attr("fill", "none");
+
+          g.selectAll("circle")
+            .data(datum)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d) {
+              return getXPos(d);
+            })
+            .attr("cy", function(d) {
+              return getYPos(d);
+            })
+            .attr("r", 4)
+            .attr("fill","blue")
+            .on("mouseover", function(d) {
+              if(d[2]!=null){
+
+              $(".tooltip")
+                  .css("opacity", .9);
+
+                $(".tooltip").html("Symptoms:<br>"+d[2])
+                  .css("left", (d3.event.pageX) + "px")
+                  .css("top", (d3.event.pageY - 28) + "px");
+              }
+            })
+            .on("mouseout", function(d) {
+                $(".tooltip")
+                    .css("opacity", 0);
+            });
         })
       });
 
@@ -105,6 +138,16 @@
 
     sparkline.showAxis = function(show) {
       showAxis = show;
+      return sparkline;
+    }
+
+    sparkline.margin = function(margin_new) {
+      margin = margin_new
+      return sparkline;
+    }
+
+    sparkline.mouseover = function(fn) {
+      mouseover = fn;
       return sparkline;
     }
 

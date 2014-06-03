@@ -2,7 +2,7 @@ body {
   font: 13px "Helvetica" !important;
   background: #fcfcfc;
   /*background-image: url('../images/stripe-bg.png');*/
-  
+
 }
 .navbar{
   margin-bottom: 0px;
@@ -92,7 +92,7 @@ body {
 
 }
 
-#diag1 .sub-category-label, 
+#diag1 .sub-category-label,
 #diag2 .sub-category-label{
   left: -23px;
   top: -1px;
@@ -332,4 +332,17 @@ body {
 
 .detail-info:first-child{
   margin-left: 20px;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }
