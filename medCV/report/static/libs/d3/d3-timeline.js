@@ -208,11 +208,12 @@
           scroll(x*scaleFactor, xScale);
         };
 
-        var zoom = d3.behavior.zoom().x(xScale).on("zoom", move);
+        // rayh: removing zoom behavior
+        // var zoom = d3.behavior.zoom().x(xScale).on("zoom", move);
 
-        gParent
-          .attr("class", "scrollable")
-          .call(zoom);
+        // gParent
+        //   .attr("class", "scrollable")
+        //   .call(zoom);
       }
 
       if (rotateTicks) {
