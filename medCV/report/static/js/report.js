@@ -79,7 +79,7 @@ var  medCV = function () {
                 position: "right"
             }
         };
-        var plot = $("."+placeholder+" > .graph").plot(data, options).data("plot");
+        var plot = $("."+placeholder+" > .graph > .overview").plot(data, options).data("plot");
 
     }
 
@@ -131,7 +131,7 @@ var  medCV = function () {
                 {x: convertDateToTimestamp("2006-02-01"), y: 1, contents: "Foo", color: "blue"}
             ]
         }
-        var plot = $("."+placeholder+" > .graph").plot(rawData, options).data("plot");
+        var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
     }
 
     function convertDateToTimestamp(myDate){
@@ -142,6 +142,20 @@ var  medCV = function () {
 
     $(function() {
         initialize();
+        
+        $(document).ready(function(){
+            $(".category-label.expandable").on('click', function(){
+                $(this).parents(".chart").toggleClass("EXPANDED");
+                $(this).siblings(".graph").find(".overview").toggle();
+                $(this).siblings(".graph").find(".detailed").toggle();
+            });
+            $(".category-label.swappable").on('click', function(){
+                $(this).siblings(".graph").find(".overview").toggle();
+                $(this).siblings(".graph").find(".detailed").toggle();
+            });
+            
+        });
+
     });
 
     return {
