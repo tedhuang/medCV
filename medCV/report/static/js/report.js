@@ -1,6 +1,6 @@
 var  medCV = function () {
 
-    var minTime = convertDateToTimestamp("1998-11-01");
+    var minTime = convertDateToTimestamp("1997-10-01");
     var maxTime = convertDateToTimestamp("2014-06-06");
 
 
@@ -23,7 +23,7 @@ var  medCV = function () {
         .beginning(minTime)
         .ending(maxTime)
         .tickFormat({
-          format: d3.time.format("20%y"),
+          format: d3.time.format("%Y"),
           tickTime: d3.time.years,
           tickInterval: 2,
           tickSize: 2
@@ -142,7 +142,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -163,7 +163,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -178,7 +178,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -195,6 +195,7 @@ var  medCV = function () {
         $.each(sleep_detailed, function(i, d){
             drawDoubleLineGraph(d);
         });
+        d3.select(".sleep .detailed").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
     }
 
     function drawTimeline(){
@@ -329,21 +330,21 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-06-10"), y: 0, contents: "Other Family", color: "green"},
-                {x: convertDateToTimestamp("1999-08-25"), y: 1, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Family Support", color: "green"},
+                {x: convertDateToTimestamp("1999-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Strong family bonds", color: "blue"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Difficulties Related to Child's Disability", color: "black"},
 
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Community Organization", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Community Support", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Difficulties Related to Child's Disability", color: "black"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Relationship Difficulties in my family", color: "black"},
             ]
         }
@@ -414,12 +415,12 @@ var  medCV = function () {
                 // hidden because of too much data
 
 
-                {x: convertDateToTimestamp("2012-02-05"), y: 0, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2012-03-20"), y: 1, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2012-04-20"), y: 2, contents: "Abilify", color: "blue"},
-                {x: convertDateToTimestamp("2012-03-17"), y: 3, contents: "Concerta", color: "red"},
-                {x: convertDateToTimestamp("2012-03-29"), y: 4, contents: "Lamictal", color: "orange"},
-                {x: convertDateToTimestamp("2012-03-06"), y: 5, contents: "Tradazone", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Abilify", color: "blue"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Concerta", color: "red"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Lamictal", color: "orange"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
@@ -538,11 +539,17 @@ var  medCV = function () {
     $(function() {
         initialize();
 
+        var stripe_offset = $(".medication.chart").find(".overview").position().left;
+        var stripe_width = ($(".medication.chart").find(".overview").width() - stripe_offset)/3.5;
+
+        $("body").css("background-position" , stripe_offset);
+        $("body").css("background-widtg" , stripe_width);
+
         $(".category-label.expandable").on('click', function(){
             $(this).parents(".chart").toggleClass("EXPANDED");
             $(this).siblings(".graph").find(".overview").toggle();
             $(this).siblings(".graph").find(".detailed").toggle();
-
+            $(this).parents(".chart").toggleClass("lighter")
         });
         // $(".category-label.swappable").on('click', function(){
         //     $(this).siblings(".graph").find(".overview").toggle();
@@ -647,13 +654,23 @@ var  medCV = function () {
         });
 
         $(document).on('click', ".removeAnnotation", function() {
-            $(this).parents("li").remove();
+            var self = $(this).parents("li");
+
+            for(var i=0; i<annotation.items.length; i++){
+                if(self.attr('id') == annotation.items[i].id){
+                    annotation.items.splice(i, 1)
+                }
+            }
+            if ( typeof(Storage) !== 'undefined') { // save in local storage
+                localStorage.annotations = JSON.stringify(annotation.items);
+            }
+            self.remove();
         });
 
         function drawAnnotations(annotations) {
             $("#annotations").find("ul").html("");
             for(var i=0; i<annotations.length; i++) {
-                var anno_item = "<li style='left: "+annotations[i].left+";'>" +
+                var anno_item = "<li id='"+annotations[i].id+"' style='left: "+annotations[i].left+";'>" +
                                     "<p style='top: "+annotations[i].top+";'>" +
                                         annotations[i].content +
                                         "<a class='removeAnnotation'><i class='fa fa-times'></i></a>" +

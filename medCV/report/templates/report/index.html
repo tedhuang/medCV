@@ -6,7 +6,7 @@
 <div class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">MedCV</a>
+          <a class="navbar-brand" href="#">MyHealthViz</a>
         </div>
         <div class="nav navbar-nav annotations-control pull-right">
             <button class="btn btn-default" id="toggleAnnotationCreator">
@@ -73,7 +73,7 @@
           </div>
         </div>
         <div class="diagnoses chart" style="height: 280px">
-          <div class="category-label">Diagnoses</div>
+          <div class="category-label">Diagnoses & Problem List</div>
           <div class="graph" style="">
             <div class="overview">
               <div id="diag-overview">
@@ -102,10 +102,22 @@
         <span>Info</span>
       </div>
       <div class="info-container">
-        <span class="detail-info">Patient ID: 201429</span>
-        <span class="detail-info">Sex: F</span>
-        <span class="detail-info">Age: 16</span>
-        <span class="detail-info">Province: British Columbia</span>
+        <table>
+          <tr>
+            <th>Patient ID</th>
+            <th>Sex</th>
+            <th>Age</th>
+            <th>Date of Birth</th>
+            <th>Province</th>
+          </tr>
+          <tr>
+            <td>201429</td>
+            <td>Female</td>
+            <td>16</td>
+            <td>1998-03-12</td>
+            <td>British Columbia</td>
+          </tr>
+        </table>
       </div>
     </div>
 </div>
