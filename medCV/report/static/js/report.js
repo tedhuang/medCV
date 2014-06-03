@@ -124,7 +124,7 @@ var  medCV = function () {
         drawFamilyGraph("family", med);
         d3.select(".family .graph").append("svg").attr("width", 1091).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
 
-        drawTimeline();
+        //drawTimeline();
 
         var sparkline = d3.sparkline()
             .beginning(minTime)
