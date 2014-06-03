@@ -87,6 +87,9 @@ body {
       background-image: url('/images/background.png');
 }*/
 
+.timeline{
+  margin-left:150px;
+}
 
 .sub-category-item {
   height: 150px;
