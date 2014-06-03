@@ -10,7 +10,7 @@ var  medCV = function () {
     var viewportHeight = $(window).height();
     var labelWidth = 150;
 
-    var sleep = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84]];
+    var sleep = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
 
     $(window).resize(function() {
         viewportWidth = $(window).width();
@@ -226,7 +226,7 @@ var  medCV = function () {
             },
             yaxis: {
                 min: 0,
-                max: 5,
+                max: 6,
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
@@ -254,29 +254,31 @@ var  medCV = function () {
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Supplements", color: "green"},
 
-                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "grey"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Ritalin", color: "blue"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Seroquel", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Ritalin", color: "red"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Seroquel", color: "blue"},
                 {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Supplements", color: "green"},
 
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "grey"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Risperdal", color: "orange"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Ritalin", color: "blue"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Prozac", color: "green"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Supplements", color: "green"},
-                // {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Seroquel", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Risperdal", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Ritalin", color: "red"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Prozac", color: "black"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 5, contents: "Seroquel", color: "blue"},
                 // hidden because of too much data
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Catapres", color: "gray"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Abilify", color: "blue"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "orange"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "green"},
-                // {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Other", color: "tan"}
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "red"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "orange"},
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
+
+        // hack all the titles
     }
 
     function convertDateToTimestamp(myDate){
