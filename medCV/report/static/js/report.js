@@ -1,6 +1,6 @@
 var  medCV = function () {
 
-    var minTime = convertDateToTimestamp("1998-11-01");
+    var minTime = convertDateToTimestamp("1997-10-01");
     var maxTime = convertDateToTimestamp("2014-06-06");
 
 
@@ -23,7 +23,7 @@ var  medCV = function () {
         .beginning(minTime)
         .ending(maxTime)
         .tickFormat({
-          format: d3.time.format("20%y"),
+          format: d3.time.format("%Y"),
           tickTime: d3.time.years,
           tickInterval: 2,
           tickSize: 2
@@ -139,7 +139,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -160,7 +160,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -175,7 +175,7 @@ var  medCV = function () {
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
-              format: d3.time.format("20%y"),
+              format: d3.time.format("%Y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 2
@@ -326,8 +326,8 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-07-05"), y: 0, contents: "Family Support", color: "green"},
-                {x: convertDateToTimestamp("1999-08-25"), y: 1, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Family Support", color: "green"},
+                {x: convertDateToTimestamp("1999-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
                 {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
