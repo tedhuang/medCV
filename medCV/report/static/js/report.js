@@ -33,8 +33,8 @@ var  medCV = function () {
     function initialize(){
 
         var footerHeight = $(window).height() - $(".info").position().top
-        if (footerHeight < 100) {
-            footerHeight = 100;
+        if (footerHeight < 150) {
+            footerHeight = 150;
         }
         console.log(footerHeight)
         $(".info").height(footerHeight)
