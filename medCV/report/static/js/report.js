@@ -339,8 +339,6 @@ var  medCV = function () {
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
-
-        // hack all the titles
     }
 
     function convertDateToTimestamp(myDate){
@@ -352,21 +350,132 @@ var  medCV = function () {
     $(function() {
         initialize();
 
-        $(document).ready(function(){
-            $(".category-label.expandable").on('click', function(){
-                $(this).parents(".chart").toggleClass("EXPANDED");
-                $(this).siblings(".graph").find(".overview").toggle();
-                $(this).siblings(".graph").find(".detailed").toggle();
-            });
-            $(".category-label.swappable").on('click', function(){
-                $(this).siblings(".graph").find(".overview").toggle();
-                $(this).siblings(".graph").find(".detailed").toggle();
+        $(".category-label.expandable").on('click', function(){
+            $(this).parents(".chart").toggleClass("EXPANDED");
+            $(this).siblings(".graph").find(".overview").toggle();
+            $(this).siblings(".graph").find(".detailed").toggle();
+
+        });
+        $(".category-label.swappable").on('click', function(){
+            $(this).siblings(".graph").find(".overview").toggle();
+            $(this).siblings(".graph").find(".detailed").toggle();
+
+            var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
+            //$(".medication > .graph > .overview").html("");
+            drawNoteGraph("medication", med);
+        });
+
+
+
+        /* annotation related code */
+        var annotation = {
+            'items' : []
+        };
+        var annotationCreator = {
+            'positionSaved' : false,
+            'content' : '',
+        };
+
+
+        // Load annotations from local storage if available
+        if (typeof(Storage) !== 'undefined'
+                && typeof localStorage.annotations !== 'undefined'
+                && localStorage.annotations != "") {
+            annotation.items = JSON.parse(localStorage.annotations);
+        }
+        drawAnnotations(annotation.items) // initialize
+
+        $(".annotation-create-overlay")
+            .mousemove(function(e){
+                //Move the line with the mouse before the first click
+                if(annotationCreator.positionSaved === false) {
+                    var left = e.pageX;
+                    var top = e.pageY;
+
+                    $(".drag-line").css("left", left)
+                    $(".anno-create-container").css("top", top - 74)
+                }
+            })
+            .mousedown(function(e){
+                annotationCreator.positionSaved = true;
             });
 
+        $("#saveAnnotation").on('click', function(){
+            if (annotationCreator.positionSaved) {
+
+                var content = $(".anno-create-container").find("textarea").val()
+
+                if($(".anno-create-container").find("textarea").val() == "") {
+                    content = "Missing content";
+                }
+
+                console.log(annotation.items)
+
+                var newAnnotation = {
+                    'content' : content,
+                    'left' : $(".drag-line").css("left"),
+                    'top' : $(".anno-create-container").css("top"),
+                };
+
+                annotation.items.push(newAnnotation);
+
+                console.log(annotation.items)
+
+                if ( typeof(Storage) !== 'undefined') { // save in local storage
+                    localStorage.annotations = JSON.stringify(annotation.items);
+                }
+
+                drawAnnotations(annotation.items);
+                $(".annotation-create-overlay").hide();
+                $(".annotation-create-overlay").find("textarea").val("");
+                annotationCreator.positionSaved = false;
+
+            }
+            else { //should not happen
+                alert("Oops, something is wrong with saving annotations..")
+            }
+        });
+
+        $("#cancelPosition").on('click', function(){
+            annotationCreator.positionSaved = false;
+            $(".annotation-create-overlay").hide();
+            $(".annotation-create-overlay").find("textarea").val("");
+        });
+
+        $("#hideAnnotation").on('click', function(){
+            $("#annotations").toggle()
+        });
+        $("#clearAnnotation").on('click', function(){
+            $("#annotations").find("ul").html("")
+            annotation.items = [];
+            if ( typeof(Storage) !== 'undefined') {
+                localStorage.removeItem('annotations');
+            }
+            $("#annotations").find("ul").html("")
         });
 
         $('.notch').toggle()
 
+        $("#toggleAnnotationCreator").on('click', function(){
+            $(".annotation-create-overlay").toggle();
+        });
+
+        $(document).on('click', ".removeAnnotation", function() {
+            $(this).parents("li").remove();
+        });
+
+        function drawAnnotations(annotations) {
+            $("#annotations").find("ul").html("");
+            for(var i=0; i<annotations.length; i++) {
+                var anno_item = "<li style='left: "+annotations[i].left+";'>" +
+                                    "<p style='top: "+annotations[i].top+";'>" +
+                                        annotations[i].content +
+                                        "<a class='removeAnnotation'><i class='fa fa-times'></i></a>" +
+                                    "</p>"+
+                                "</li>";
+                $("#annotations").find("ul").append(anno_item)
+            }
+        }
     });
 
     return {

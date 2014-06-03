@@ -22,31 +22,31 @@
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Bedtime</span>
-                  <img src="//placehold.it/800x150" />
+                  <img src="//placehold.it/800x100" />
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Sleepiness</span>
-                  <img src="//placehold.it/800x150" />
+                  <img src="//placehold.it/800x100" />
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Awakenings</span>
-                  <img src="//placehold.it/800x150" />
+                  <img src="//placehold.it/800x100" />
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Timing</span>
-                  <img src="//placehold.it/800x150" />
+                  <img src="//placehold.it/800x100" />
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Breaking</span>
-                  <img src="//placehold.it/800x150" />
+                  <img src="//placehold.it/800x100" />
                 </div>
               </div>
 
@@ -59,7 +59,7 @@
             <div class="overview"></div>
             <div class="detailed">
 
-              blahh
+              blah
 
             </div>
           </div>
@@ -86,8 +86,36 @@
       </div>
       <div class="events"></div>
       <div class="timeline"></div>
+
+      <div class="annotations-control">
+          <button class="btn btn-default" id="hideAnnotation">
+            Hide Annotations
+          </button>
+          <button class="btn btn-default" id="toggleAnnotationCreator">
+            Add Annotations
+          </button>
+          <button class="btn btn-default" id="clearAnnotation">
+            Clear All
+          </button>
+      </div>
     </div>
 </div>
 
-{% endblock %}
+<div class="annotation-create-overlay">
+  <span class="drag-line" >
+    <div class="anno-create-container">
+      <textarea placeholder="Annotation Text here.."  maxLength="140"></textarea>
+      <a id="cancelPosition">
+        <i class="fa fa-mail-reply"></i> CANCEL
+      </a>
+      <a id="saveAnnotation">
+        <i class="fa fa-save"></i> SAVE
+      </a>
+    </div>
+  </span>
+</div>
+<div id="annotations">
+  <ul></ul>
+</div>
 
+{% endblock %}
