@@ -27,6 +27,7 @@
         itemHeight = 20,
         itemMargin = 5,
         showTodayLine = false,
+        showAxis = true,
         showTodayFormat = {marginTop: 25, marginBottom: 0, width: 1, color: colorCycle},
         showBorderLine = false,
         showBorderFormat = {marginTop: 25, marginBottom: 0, width: 1, color: colorCycle}
@@ -108,11 +109,12 @@
         .ticks(tickFormat.tickTime, tickFormat.tickInterval)
         .tickSize(tickFormat.tickSize);
 
-      g.append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate(" + 0 +","+(margin.top + (itemHeight + itemMargin) * maxStack)+")")
-        .call(xAxis);
-
+      if (showAxis) {
+        g.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + 0 +","+(margin.top + (itemHeight + itemMargin) * maxStack)+")")
+          .call(xAxis);
+      }
       // draw the chart
       g.each(function(d, i) {
         d.forEach( function(datum, index){
@@ -438,6 +440,11 @@
       return timeline;
     };
 
+    timeline.showAxis = function(show) {
+
+      showAxis = show;
+      return timeline;
+    }
     return timeline;
   };
 })();

@@ -32,6 +32,13 @@ var  medCV = function () {
 
     function initialize(){
 
+        var footerHeight = $(window).height() - $(".info").position().top
+        if (footerHeight < 100) {
+            footerHeight = 100;
+        }
+        console.log(footerHeight)
+        $(".info").height(footerHeight)
+
         $(".graph").width(viewportWidth-labelWidth-5); //set graph width
         $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
 
@@ -118,11 +125,13 @@ var  medCV = function () {
         ];
 
         // drawGraph("sleep", sleep);
+        graphWidth = $("#diag-overview").parents(".graph").width() - 40
+        
         drawGraph("medication", med);
-        d3.select(".medication .graph").append("svg").attr("width", 1091).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
+        d3.select(".medication .graph").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
         drawNoteGraph("medication", med);
         drawFamilyGraph("family", med);
-        d3.select(".family .graph").append("svg").attr("width", 1091).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
+        d3.select(".family .graph").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
 
         //drawTimeline();
 
@@ -138,14 +147,16 @@ var  medCV = function () {
 
         var sleep_data = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
         sleep_data.forEach(function(e) { e[0] = convertDateToTimestamp(e[0]);});
+        graphWidth = $("#sleep-overview").parents(".graph").width() - 40
 
         d3.select("#sleep-overview")
-          .append("svg").attr("width", 1091)
+          .append("svg").attr("width", graphWidth)
           .attr("height", 150)
           .datum(sleep_data)
           .call(sparkline);
 
         var chart = d3.timeline()
+            .showAxis(true)
             .beginning(minTime)
             .ending(maxTime)
             .tickFormat({
@@ -159,11 +170,25 @@ var  medCV = function () {
             .margin({top: 0, bottom: 0, left: 0, right: 0})
             .stack();
 
-        d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
-        d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_classifier).call(chart);
+        var axisLessChart = d3.timeline()
+            .showAxis(false)
+            .beginning(minTime)
+            .ending(maxTime)
+            .tickFormat({
+              format: d3.time.format("20%y"),
+              tickTime: d3.time.years,
+              tickInterval: 2,
+              tickSize: 2
+            })
+            .itemHeight(18)
+            .itemMargin(1)
+            .margin({top: 0, bottom: 0, left: 0, right: 0})
+            .stack();
 
-		graphWidth = $("#diag-overview").parents(".graph").width() - 40
-        d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
+        graphWidth = $("#diag-overview").parents(".graph").width() - 40
+        d3.select("#diag-overview > #diag1").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(axisLessChart);
+        d3.select("#diag-overview > #diag2").append("svg").attr("width", graphWidth).datum(diagnosis_classifier).call(chart);
+
         $.each(sleep_detailed, function(i, d){
             drawDoubleLineGraph(d);
         });

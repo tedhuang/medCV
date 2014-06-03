@@ -1,6 +1,8 @@
 body {
   font: 13px "Helvetica" !important;
   background: #fcfcfc;
+/*  background-image: url('../images/stripe-bg.png');*/
+  
 }
 .navbar{
   margin-bottom: 0px;
@@ -17,7 +19,7 @@ body {
 }
 
 .info{
-  height: 400px;
+  height: 200px;
 }
 .chart{
   position: relative;
@@ -73,6 +75,27 @@ body {
 .detail-chart{
   width:800px;
   height: 100px;
+}
+
+#diag1, #diag2{
+  position: relative;
+  padding-top: 10px;
+}
+
+#diag1{
+  margin-bottom: 15px;
+}
+
+#diag2{
+ border-top: 1px solid #666;
+
+}
+
+#diag1 .sub-category-label, 
+#diag2 .sub-category-label{
+  left: -23px;
+  top: -1px;
+
 }
 
 /**** background category-label ***/
