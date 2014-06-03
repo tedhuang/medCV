@@ -1,9 +1,6 @@
 body {
   font: 13px "Helvetica" !important;
   background: #fcfcfc;
-  background-image: url('../images/stripe-bg.png');
-  background-size: 25.5%;
-
 }
 .navbar{
   margin-bottom: 0px;
@@ -72,6 +69,7 @@ body {
 .graph{
     height:100%;
     overflow:hidden;
+    position: relative;
 }
 .graph .overview{
   height:150px;
@@ -79,6 +77,13 @@ body {
 .graph .detailed{
   display:none;
   height:150px;
+}
+
+.graph .stripe-bg{
+  position: absolute;
+  top: 0;
+  left 0;
+  z-index:-1;
 }
 
 .detail-chart{
@@ -151,6 +156,7 @@ body {
 .family.chart{
   background-color: rgba(49, 75, 191, 0.2);
 }
+
 
 
 
