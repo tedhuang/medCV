@@ -84,36 +84,36 @@ var  medCV = function () {
               {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-05-01")},
               {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
               {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
-              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "Attention", times: [
-              {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-05-01")},
-              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
-              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
-              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-06-01")},
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-06-01")},
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-06-01")},
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "Fine Motor Skills", times: [
-              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-05-01")},
+              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-06-01")},
           ]},
           {label: "Achievement", times: [
-              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
-              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
-              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-06-01")},
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-06-01")},
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "Executive Functioning", times: [
-              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")}
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-06-01")}
           ]},
           {label: "Sensory Problems", times: [
-              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
         ];
 
         var diagnosis_classifier = [
           {label: "Bipolar", times: [
-              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "General Anxiety Disorder", times: [
-              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
         ];
 
@@ -385,12 +385,13 @@ var  medCV = function () {
                 {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Seroquel", color: "blue"},
                 // hidden because of too much data
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Abilify", color: "blue"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Concerta", color: "red"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Lamictal", color: "orange"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
+
+                {x: convertDateToTimestamp("2012-02-05"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-03-20"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2012-04-20"), y: 2, contents: "Abilify", color: "blue"},
+                {x: convertDateToTimestamp("2012-03-17"), y: 3, contents: "Concerta", color: "red"},
+                {x: convertDateToTimestamp("2012-03-29"), y: 4, contents: "Lamictal", color: "orange"},
+                {x: convertDateToTimestamp("2012-03-06"), y: 5, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
