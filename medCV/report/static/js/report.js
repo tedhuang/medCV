@@ -599,13 +599,23 @@ var  medCV = function () {
         });
 
         $(document).on('click', ".removeAnnotation", function() {
-            $(this).parents("li").remove();
+            var self = $(this).parents("li");
+            
+            for(var i=0; i<annotation.items.length; i++){
+                if(self.attr('id') == annotation.items[i].id){
+                    annotation.items.splice(i, 1)
+                }
+            }
+            if ( typeof(Storage) !== 'undefined') { // save in local storage
+                localStorage.annotations = JSON.stringify(annotation.items);
+            }
+            self.remove();
         });
 
         function drawAnnotations(annotations) {
             $("#annotations").find("ul").html("");
             for(var i=0; i<annotations.length; i++) {
-                var anno_item = "<li style='left: "+annotations[i].left+";'>" +
+                var anno_item = "<li id='"+annotations[i].id+"' style='left: "+annotations[i].left+";'>" +
                                     "<p style='top: "+annotations[i].top+";'>" +
                                         annotations[i].content +
                                         "<a class='removeAnnotation'><i class='fa fa-times'></i></a>" +
