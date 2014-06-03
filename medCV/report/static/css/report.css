@@ -1,7 +1,8 @@
 body {
   font: 13px "Helvetica" !important;
   background: #fcfcfc;
-  /*background-image: url('../images/stripe-bg.png');*/
+  background-image: url('../images/stripe-bg.png');
+  background-size: 25.5%;
   
 }
 .navbar{
@@ -135,6 +136,9 @@ body {
 
 .sleep.chart{
   background-color: rgba(236, 124, 151, 0.4);
+}
+.sleep.chart.lighter{
+  background-color: rgba(236, 124, 151, 0.18);
 }
 .medication.chart{
   background-color: rgba(224, 191, 0, 0.3);

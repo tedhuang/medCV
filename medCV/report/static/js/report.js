@@ -411,12 +411,12 @@ var  medCV = function () {
                 // hidden because of too much data
 
 
-                {x: convertDateToTimestamp("2012-02-05"), y: 0, contents: "Supplements", color: "green"},
-                {x: convertDateToTimestamp("2012-03-20"), y: 1, contents: "Catapres", color: "gray"},
-                {x: convertDateToTimestamp("2012-04-20"), y: 2, contents: "Abilify", color: "blue"},
-                {x: convertDateToTimestamp("2012-03-17"), y: 3, contents: "Concerta", color: "red"},
-                {x: convertDateToTimestamp("2012-03-29"), y: 4, contents: "Lamictal", color: "orange"},
-                {x: convertDateToTimestamp("2012-03-06"), y: 5, contents: "Tradazone", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Supplements", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Catapres", color: "gray"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Abilify", color: "blue"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Concerta", color: "red"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Lamictal", color: "orange"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Tradazone", color: "black"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
@@ -490,11 +490,17 @@ var  medCV = function () {
     $(function() {
         initialize();
 
+        var stripe_offset = $(".medication.chart").find(".overview").position().left;
+        var stripe_width = ($(".medication.chart").find(".overview").width() - stripe_offset)/3.5;
+
+        $("body").css("background-position" , stripe_offset);
+        $("body").css("background-widtg" , stripe_width);
+
         $(".category-label.expandable").on('click', function(){
             $(this).parents(".chart").toggleClass("EXPANDED");
             $(this).siblings(".graph").find(".overview").toggle();
             $(this).siblings(".graph").find(".detailed").toggle();
-
+            $(this).parents(".chart").toggleClass("lighter")
         });
         // $(".category-label.swappable").on('click', function(){
         //     $(this).siblings(".graph").find(".overview").toggle();
