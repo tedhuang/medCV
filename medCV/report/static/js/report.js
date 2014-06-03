@@ -15,8 +15,8 @@ var  medCV = function () {
     $(window).resize(function() {
         viewportWidth = $(window).width();
         viewportHeight = $(window).height();
-        console.log("resize: "+viewportWidth);
         $(".graph").width(viewportWidth-labelWidth-5);
+        $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
     });
 
     var timeline_axis = d3.sparkline()
@@ -26,13 +26,14 @@ var  medCV = function () {
           format: d3.time.format("20%y"),
           tickTime: d3.time.years,
           tickInterval: 2,
-          tickSize: 6
+          tickSize: 2
         })
 
 
     function initialize(){
 
         $(".graph").width(viewportWidth-labelWidth-5); //set graph width
+        $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
 
         //TODO: load data
 
@@ -42,26 +43,31 @@ var  medCV = function () {
         var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
 
         var sleep_detailed = [{
+                className: "bedtime",
                 name: "Difficulty Falling Asleep in Evening",
                 frequency: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]],
                 severity: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]]
             },
             {
+                className: "sleepiness",
                 name: "Sleepiness during day",
                 frequency: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 3], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 3]]
             },
             {
+                className: "awakenings",
                 name: "Awakenings",
                 frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 4], ["2012-05-01", 3]]
             },
             {
+                className: "timing",
                 name: "Timing : How irregular is your child's sleep?",
-                // frequency: (?)[["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
+                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]]
             },
             {
+                className: "breathing",
                 name: "Breathing: how much of a problem?",
                 frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2]],
                 severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3]]
@@ -127,11 +133,12 @@ var  medCV = function () {
               format: d3.time.format("20%y"),
               tickTime: d3.time.years,
               tickInterval: 2,
-              tickSize: 6
+              tickSize: 2
             })
 
         var sleep_data = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
         sleep_data.forEach(function(e) { e[0] = convertDateToTimestamp(e[0]);});
+
         d3.select("#sleep-overview")
           .append("svg").attr("width", 1091)
           .attr("height", 150)
@@ -145,7 +152,7 @@ var  medCV = function () {
               format: d3.time.format("20%y"),
               tickTime: d3.time.years,
               tickInterval: 2,
-              tickSize: 6
+              tickSize: 2
             })
             .itemHeight(18)
             .itemMargin(1)
@@ -154,6 +161,12 @@ var  medCV = function () {
 
         d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
         d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_classifier).call(chart);
+
+		graphWidth = $("#diag-overview").parents(".graph").width() - 40
+        d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
+        $.each(sleep_detailed, function(i, d){
+            drawDoubleLineGraph(d);
+        });
     }
 
     function drawTimeline(){
@@ -223,7 +236,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -382,6 +396,65 @@ var  medCV = function () {
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
     }
 
+    function drawDoubleLineGraph(data){
+        var placeholder = data.className;
+        var rawData = data["frequency"];
+        var rawData2 = data["severity"];
+        var min = rawData[0][0];
+        var max = rawData[rawData.length-1][0];
+        $.each(rawData, function(i, data){
+            data[0] = convertDateToTimestamp(data[0]);
+        });
+        $.each(rawData2, function(i, data){
+            data[0] = convertDateToTimestamp(data[0]);
+        });
+
+        var options ={
+          xaxis: {
+                min: convertDateToTimestamp(min),
+                max: convertDateToTimestamp(max),
+                mode: "time",
+                tickSize: [1, "year"],
+                show:false,
+                tickLength: 0,
+                axisLabel: 'Month',
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            yaxis: {
+                show:false,
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: false,
+                    steps: true
+                }
+            },
+            grid: {
+                borderWidth: 1
+            },
+            legend: {
+                labelBoxBorderColor: "none",
+                position: "left"
+            }
+        };
+        var plot = $.plot("."+placeholder, [], options);
+
+        plot.setData( [
+            { label: "frequency", data: rawData, color: '#4572A7' },
+            { label: "severity", data: rawData2,color: '#792dcc' }
+        ]);
+        plot.setupGrid();
+        plot.draw();
+    }
+
     function convertDateToTimestamp(myDate){
         myDate=myDate.split("-");
         var newDate=myDate[1]+"/"+myDate[2]+"/"+myDate[0];//month/date year
@@ -397,18 +470,18 @@ var  medCV = function () {
             $(this).siblings(".graph").find(".detailed").toggle();
 
         });
-        $(".category-label.swappable").on('click', function(){
-            $(this).siblings(".graph").find(".overview").toggle();
-            $(this).siblings(".graph").find(".detailed").toggle();
-
-            var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
-            //$(".medication > .graph > .overview").html("");
-            drawNoteGraph("medication", med);
-        });
-
+        // $(".category-label.swappable").on('click', function(){
+        //     $(this).siblings(".graph").find(".overview").toggle();
+        //     $(this).siblings(".graph").find(".detailed").toggle();
+        //     var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
+        //     //$(".medication > .graph > .overview").html("");
+        //     drawNoteGraph("medication", med);
+        // });
 
 
+        /* *********************** */
         /* annotation related code */
+        /* *********************** */
         var annotation = {
             'items' : []
         };
@@ -443,6 +516,7 @@ var  medCV = function () {
 
         $("#saveAnnotation").on('click', function(){
             if (annotationCreator.positionSaved) {
+                var annotation_id =  Math.random().toString(36).substr(2,5);
 
                 var content = $(".anno-create-container").find("textarea").val()
 
@@ -450,17 +524,14 @@ var  medCV = function () {
                     content = "Missing content";
                 }
 
-                console.log(annotation.items)
-
                 var newAnnotation = {
+                    'id' : 'anno-' +  annotation_id,
                     'content' : content,
                     'left' : $(".drag-line").css("left"),
                     'top' : $(".anno-create-container").css("top"),
                 };
 
                 annotation.items.push(newAnnotation);
-
-                console.log(annotation.items)
 
                 if ( typeof(Storage) !== 'undefined') { // save in local storage
                     localStorage.annotations = JSON.stringify(annotation.items);

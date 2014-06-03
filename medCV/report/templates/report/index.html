@@ -3,10 +3,20 @@
 
 {% block page_body %}
 
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">MedCV</a>
+        </div>
+        <div class="nav navbar-nav annotations-control pull-right">
+            <button class="btn btn-default" id="toggleAnnotationCreator">
+              Add Annotations
+            </button>
+            <button class="btn btn-default" id="hideAnnotation">
+              Hide Annotations
+            </button>
+            <button class="btn btn-default" id="clearAnnotation">
+              Clear All
         </div>
     </div>
 </div>
@@ -17,36 +27,37 @@
           <div class="category-label expandable">Sleep</div>
           <div class="graph">
             <div style="margin-left: 23px" id="sleep-overview" class="overview"></div>
+            <div class="overview"></div>
             <div class="detailed">
 
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Bedtime</span>
-                  <img src="//placehold.it/800x100" />
+                  <div class="detail-chart bedtime"></div>
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Sleepiness</span>
-                  <img src="//placehold.it/800x100" />
+                 <div class="detail-chart sleepiness"></div>
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Awakenings</span>
-                  <img src="//placehold.it/800x100" />
+                  <div class="detail-chart awakenings"></div>
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
                   <span class="sub-category-label">Timing</span>
-                  <img src="//placehold.it/800x100" />
+                  <div class="detail-chart timing"></div>
                 </div>
               </div>
               <div class="sub-category-item">
                 <div class="sub-category-graph">
-                  <span class="sub-category-label">Breaking</span>
-                  <img src="//placehold.it/800x100" />
+                  <span class="sub-category-label">Breathing</span>
+                  <div class="detail-chart breathing"></div>
                 </div>
               </div>
 
@@ -83,18 +94,6 @@
       </div>
       <div class="events"></div>
       <div class="timeline"></div>
-
-      <div class="annotations-control">
-          <button class="btn btn-default" id="hideAnnotation">
-            Hide Annotations
-          </button>
-          <button class="btn btn-default" id="toggleAnnotationCreator">
-            Add Annotations
-          </button>
-          <button class="btn btn-default" id="clearAnnotation">
-            Clear All
-          </button>
-      </div>
     </div>
 </div>
 

@@ -1,7 +1,11 @@
 body {
   font: 13px "Helvetica" !important;
-  padding-top: 50px;
   background: #fcfcfc;
+}
+.navbar{
+  margin-bottom: 0px;
+  border-radius: 0px;
+  box-shadow: 2px 0px 3px #999;
 }
 
 /* ---------- Layout ---------- */
@@ -40,13 +44,17 @@ body {
   background-color: #252525;
   text-align: center;
   padding-top: 8px;
-  cursor: pointer;
   border-right: 2px solid #666;
   font-size: 1.2em;
   color: #999;
 }
+.category-label.expandable,
+.category-label.swappable{
+  cursor: pointer;
+}
 
-.category-label:hover{
+.category-label.expandable:hover,
+.category-label.clickable:hover{
     background-color: #333;
 }
 
@@ -60,6 +68,11 @@ body {
 .graph .detailed{
   display:none;
   height:150px;
+}
+
+.detail-chart{
+  width:800px;
+  height: 100px;
 }
 
 /**** background category-label ***/
@@ -108,11 +121,12 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   padding: 3px 8px;
   color: #fff;
   border-bottom-right-radius: 3px;
   font-size: 1.1em;
+  z-index: 10;
 }
 
 
@@ -263,6 +277,6 @@ body {
 }
 
 .annotations-control{
-  padding: 10px;
+  padding: 8px;
   display: inline-block;
 }
