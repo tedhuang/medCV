@@ -90,6 +90,9 @@ var  medCV = function () {
           {label: "Sensory Problems", times: [
               {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
           ]},
+        ];
+
+        var diagnosis_classifier = [
           {label: "Bipolar", times: [
               {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
           ]},
@@ -98,27 +101,46 @@ var  medCV = function () {
           ]},
         ];
 
-        drawGraph("sleep", sleep);
+        // drawGraph("sleep", sleep);
         drawGraph("medication", med);
         drawNoteGraph("medication", med);
         drawFamilyGraph("family", med);
         drawTimeline();
 
-        var chart = d3.timeline()
-            .beginning(convertDateToTimestamp("1999-05-01"))
-            .ending(convertDateToTimestamp("2014-05-01"))
+        var sparkline = d3.sparkline()
+            .beginning(minTime)
+            .ending(maxTime)
             .tickFormat({
               format: d3.time.format("20%y"),
               tickTime: d3.time.years,
               tickInterval: 2,
               tickSize: 6
             })
-            .itemHeight(20)
+
+        var sleep_data = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84], ["2014-06-01", 84]];
+        sleep_data.forEach(function(e) { e[0] = convertDateToTimestamp(e[0]);});
+        d3.select("#sleep-overview")
+          .append("svg").attr("width", 1091)
+          .attr("height", 150)
+          .datum(sleep_data)
+          .call(sparkline);
+
+        var chart = d3.timeline()
+            .beginning(minTime)
+            .ending(maxTime)
+            .tickFormat({
+              format: d3.time.format("20%y"),
+              tickTime: d3.time.years,
+              tickInterval: 2,
+              tickSize: 6
+            })
+            .itemHeight(18)
             .itemMargin(1)
             .margin({top: 0, bottom: 0, left: 0, right: 0})
             .stack();
 
         d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
+        d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_classifier).call(chart);
     }
 
     function drawTimeline(){
