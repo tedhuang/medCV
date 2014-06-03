@@ -93,7 +93,7 @@ var  medCV = function () {
               {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "Fine Motor Skills", times: [
-              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-06-01")},
+              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-05-01")},
           ]},
           {label: "Achievement", times: [
               {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-06-01")},
@@ -101,7 +101,7 @@ var  medCV = function () {
               {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
           ]},
           {label: "Executive Functioning", times: [
-              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-06-01")}
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")}
           ]},
           {label: "Sensory Problems", times: [
               {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-06-01")}
