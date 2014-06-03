@@ -13,19 +13,21 @@ body {
 }
 
 .info{
-  height: 500px;
+  height: 400px;
 }
 .chart{
   position: relative;
   width:100%;
   height:150px;
+  border-bottom: 2px solid #666;
+
   webkit-transition:all 0.2s ease-in-out;
   -moz-transition:all 0.2s ease-in-out;
   -o-transition:all 0.2s ease-in-out;
   transition:all 0.2s ease-in-out;
 }
 .chart.EXPANDED{
-  height: 750px;
+  height: 500px;
   webkit-transition:all 0.2s ease-in-out;
   -moz-transition:all 0.2s ease-in-out;
   -o-transition:all 0.2s ease-in-out;
@@ -35,22 +37,21 @@ body {
   float:left;
   width:150px;
   height: 100%;
-  background-color: #ccc;
+  background-color: #252525;
   text-align: center;
-  padding: 5px;
+  padding-top: 8px;
   cursor: pointer;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
+  border-right: 2px solid #666;
   font-size: 1.2em;
+  color: #999;
 }
 
 .category-label:hover{
-    background-color: #bbb;
+    background-color: #333;
 }
 
 .graph{
     height:100%;
-    border-bottom: 1px solid black;
     overflow:hidden;
 }
 .graph .overview{
@@ -58,6 +59,7 @@ body {
 }
 .graph .detailed{
   display:none;
+  height:150px;
 }
 
 /**** background category-label ***/
@@ -92,7 +94,7 @@ body {
 }
 
 .sub-category-item {
-  height: 150px;
+  height: 100px;
   border-bottom: 1px solid #999;
   overflow: hidden;
 }
@@ -121,4 +123,146 @@ body {
 
 #diag-overview {
   margin-left: 23px
+}
+.info .timeline{
+
+}
+
+/* annotation */
+
+
+#annotations ul{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#annotations li{
+  position: absolute;
+  top: 65px;
+  list-style: none;
+  z-index: 5;
+}
+
+.annotation-create-overlay{
+  display:none;
+}
+
+.annotation-create-overlay .drag-line .anno-create-container,
+#annotations li p{
+  position: relative;
+  left: 15px;
+  border-radius: 1px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 3px 15px 3px 5px;
+  font-size: 0.9em;
+  width: 150px;
+  text-align:center;
+  background: rgba(233, 233, 233, 0.9);
+  border: 2px solid #666;
+}
+#annotations li p>a{
+  color: #666;
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  cursor: pointer;
+}
+.annotation-create-overlay .drag-line .anno-create-container:after,
+.annotation-create-overlay .drag-line .anno-create-container:before,
+#annotations li p:after,
+#annotations li p:before {
+  right: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.annotation-create-overlay .drag-line .anno-create-container:after,
+#annotations li p:after {
+  border-color: rgba(213, 213, 213, 0);
+  border-right-color: rgba(243, 243, 243, 0.9);
+  border-width: 11px;
+  margin-top: -11px;
+}
+.annotation-create-overlay .drag-line .anno-create-container:before,
+#annotations li p:before {
+  border-color: rgba(213, 213, 213, 0);
+  border-right-color: #666;
+  border-width: 13px;
+  margin-top: -13px;
+}
+
+.annotation-create-overlay{
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+}
+
+.annotation-create-overlay .drag-line{
+  width: 0;
+  border-right: 2px dotted #000;
+  height: 100%;
+  position: absolute;
+  z-index: 15;
+}
+
+.annotation-create-overlay .drag-line .anno-create-container {
+  top: 30%;
+  height: 150px;
+  width: 200px;
+}
+.annotation-create-overlay .drag-line .anno-create-container textarea{
+  background: transparent;
+  width: 100%;
+  height: 110px;
+  border: 0px;
+  resize: none;
+  margin-bottom: 5px;
+}
+
+.annotation-create-overlay .drag-line .anno-create-container>a{
+  cursor:pointer;
+  color: #666;
+  float:left;
+}
+
+.annotation-create-overlay .drag-line .anno-create-container>a:last-child{
+  float:right
+}
+
+
+#annotations>ul,
+#annotations>ul.ng-hide,
+#annotations .annotation-create-overlay,
+#annotations .annotation-create-overlay.ng-hide{
+  -webkit-transition:all linear 0.1s;
+  -moz-transition:all linear 0.1s;
+  -o-transition:all linear 0.1s;
+  transition:all linear 0.1s;
+  display:block!important;
+}
+
+#annotations>ul.ng-hide{
+  opacity:0;
+  position: absolute;
+  left: -1500px;
+  display:none;
+  z-index: -999;
+}
+
+#annotations .annotation-create-overlay.ng-hide{
+  opacity:0;
+  z-index: -999;
+}
+
+.annotations-control{
+  padding: 10px;
+  display: inline-block;
 }
