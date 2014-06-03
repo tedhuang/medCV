@@ -53,11 +53,7 @@ var  medCV = function () {
 
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
-
-        // var med_taken = [["1999-05-01", "Foo"], ["1999-05-01", "Bar"], ["1999-05-01", "Baz"]
-        //                  ["2004-05-01", "Ruffle"],
-        //                  ["2009-05-01", "Rack"],
-        //                  ["2012-05-01", "Rackspace"], ["2012-05-01", "Jingle"]];
+        drawNoteGraph("medication", med);
     }
 
     function drawGraph(placeholder, rawData){
@@ -151,11 +147,21 @@ var  medCV = function () {
             },
             comments: [
                 {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Ritalin", color: "blue"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Seroquel", color: "green"},
+
                 {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Risperdal", color: "orange"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Ritalin", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Prozac", color: "green"},
+                // {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Seroquel", color: "green"},
+                // hidden because of too much data
+
                 {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Catapres", color: "grey"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Abilify", color: "blue"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "orange"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "green"}
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "green"},
+                // {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Other", color: "tan"}
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
