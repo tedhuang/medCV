@@ -1,6 +1,8 @@
 body {
   font: 13px "Helvetica" !important;
   background: #fcfcfc;
+  /*background-image: url('../images/stripe-bg.png');*/
+  
 }
 .navbar{
   margin-bottom: 0px;
@@ -17,7 +19,8 @@ body {
 }
 
 .info{
-  height: 400px;
+  height: 200px;
+  background: #666;
 }
 .chart{
   position: relative;
@@ -75,9 +78,30 @@ body {
   height: 100px;
 }
 
+#diag1, #diag2{
+  position: relative;
+  padding-top: 10px;
+}
+
+#diag1{
+  margin-bottom: 15px;
+}
+
+#diag2{
+ border-top: 1px solid #666;
+
+}
+
+#diag1 .sub-category-label, 
+#diag2 .sub-category-label{
+  left: -23px;
+  top: -1px;
+
+}
+
 /**** background category-label ***/
-.chart > .category-label{
-  background-image: url('../images/sleep.png');
+.chart > .category-label,
+.info > .category-label{
   background-position: 50% 50%;
   background-size: 66%;
   background-repeat: no-repeat;
@@ -98,9 +122,26 @@ body {
 .family > .category-label {
     background-image: url('../images/family.png');
 }
-/*.info > .category-label {
-      background-image: url('/images/background.png');
-}*/
+.info > .category-label {
+  background-image: url('../images/background.png');
+}
+
+.sleep.chart{
+  background-color: rgba(236, 124, 151, 0.4)
+}
+.medication.chart{
+  background-color: rgba(224, 191, 0, 0.3)
+}
+
+.diagnoses.chart{
+  background-color: rgba(20, 147, 83, 0.1)
+}
+
+.family.chart{
+  background-color: rgba(49, 75, 191, 0.2)
+}
+
+
 
 .timeline{
   margin-left:150px;
@@ -137,9 +178,6 @@ body {
 
 #diag-overview {
   margin-left: 23px
-}
-.info .timeline{
-
 }
 
 /* annotation */
@@ -281,8 +319,17 @@ body {
   display: inline-block;
 }
 
+.info-container{
+  padding: 10px;
+}
+
 .detail-info{
-    font-size: 2em;
-    margin-left: 40px;
-    color: #5b5e55;
+    font-size: 1.8em;
+    margin-right: 40px;
+    color: #fff;
+    text-shadow: 1px 1px 0px #333;
+}
+
+.detail-info:first-child{
+  margin-left: 20px;
 }
