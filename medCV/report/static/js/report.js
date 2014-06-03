@@ -1,5 +1,9 @@
 var  medCV = function () {
 
+    var minTime = convertDateToTimestamp("1998-11-01");
+    var maxTime = convertDateToTimestamp("2014-06-06");
+
+
     "use strict";
 
     var viewportWidth = $(window).width();
@@ -17,6 +21,7 @@ var  medCV = function () {
 
 
     function initialize(){
+
         $(".graph").width(viewportWidth-labelWidth-5); //set graph width
 
         //TODO: load data
@@ -53,10 +58,68 @@ var  medCV = function () {
             }
         ];
 
+
+        var drug_data = [
+        ];
+
+        var diagnosis_data = [
+          {label: "Gross Motor Skills", times: [
+              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-05-01")},
+              {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-05-01")}]},
+          {label: "Adaptive Behavior", times: [
+              {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-05-01")},
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+          {label: "Attention", times: [
+              {"starting_time": convertDateToTimestamp("2004-05-01"), "ending_time": convertDateToTimestamp("2007-05-01")},
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+          {label: "Fine Motor Skills", times: [
+              {"starting_time": convertDateToTimestamp("1999-05-01"), "ending_time": convertDateToTimestamp("2004-05-01")},
+          ]},
+          {label: "Achievement", times: [
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")},
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2012-05-01")},
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+          {label: "Executive Functioning", times: [
+              {"starting_time": convertDateToTimestamp("2007-05-01"), "ending_time": convertDateToTimestamp("2009-05-01")}
+          ]},
+          {label: "Sensory Problems", times: [
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+          {label: "Bipolar", times: [
+              {"starting_time": convertDateToTimestamp("2012-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+          {label: "General Anxiety Disorder", times: [
+              {"starting_time": convertDateToTimestamp("2009-05-01"), "ending_time": convertDateToTimestamp("2014-05-01")}
+          ]},
+        ];
+
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
         drawNoteGraph("medication", med);
         drawTimeline();
+
+        var chart = d3.timeline()
+            .beginning(convertDateToTimestamp("1999-05-01"))
+            .ending(convertDateToTimestamp("2014-05-01"))
+            .tickFormat({
+              format: d3.time.format("20%y"),
+              tickTime: d3.time.years,
+              tickInterval: 2,
+              tickSize: 6
+            })
+            .itemHeight(20)
+            .itemMargin(5)
+            .margin({top: 0, bottom: 0, left: 0, right: 0})
+            .stack();
+
+        d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
     }
 
     function drawTimeline(){
@@ -72,7 +135,6 @@ var  medCV = function () {
                 max: max,
                 mode: "time",
                 tickSize: [1, "year"],
-
                 tickLength: 0,
                 axisLabel: 'Month',
                 axisLabelUseCanvas: true,
@@ -101,25 +163,9 @@ var  medCV = function () {
             }
         };
         var plot = $(".timeline").plot(data, options).data("plot");
-        // var container = $(".timeline");
-        // var data = [
-        //     {id: 1, content: 'item 1', start: '2013-04-20'},
-        //     {id: 2, content: 'item 2', start: '2013-04-14'},
-        //     {id: 3, content: 'item 3', start: '2013-04-18'},
-        //     {id: 4, content: 'item 4', start: '2013-04-16', end: '2013-04-19'},
-        //     {id: 5, content: 'item 5', start: '2013-04-25'},
-        //     {id: 6, content: 'item 6', start: '2013-04-27'}
-        // ];
-        // var options = {
-        //     min: sleep[0][0],
-        //     max: sleep[sleep.length-1][0]
-        // };
-        // var timeline = new vis.Timeline(container, data, options);
     }
 
     function drawGraph(placeholder, rawData){
-        var min = rawData[0][0];
-        var max = rawData[rawData.length-1][0];
         $.each(rawData, function(i, data){
             data[0] = convertDateToTimestamp(data[0]);
         });
@@ -128,11 +174,10 @@ var  medCV = function () {
         ];
         var options ={
           xaxis: {
-                min: convertDateToTimestamp(min),
-                max: convertDateToTimestamp(max),
+                min: minTime,
+                max: maxTime,
                 mode: "time",
                 tickSize: [1, "year"],
-                show:false,
                 tickLength: 0,
                 axisLabel: 'Month',
                 axisLabelUseCanvas: true,
@@ -166,14 +211,12 @@ var  medCV = function () {
     }
 
     function drawNoteGraph(placeholder, rawData) {
-        var min = rawData[0][0];
         var options ={
           xaxis: {
-                min: convertDateToTimestamp("1999-05-01"),
-                max: (new Date(2013, 11, 1)).getTime(),
+                min: minTime,
+                max: maxTime,
                 mode: "time",
                 tickSize: [1, "year"],
-                show:false,
                 tickLength: 0,
                 axisLabel: 'Month',
                 axisLabelUseCanvas: true,
@@ -183,7 +226,7 @@ var  medCV = function () {
             },
             yaxis: {
                 min: 0,
-                max: 4,
+                max: 5,
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
@@ -207,14 +250,20 @@ var  medCV = function () {
                 show: true
             },
             comments: [
+                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Supplements", color: "green"},
+
+                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Supplements", color: "green"},
+
                 {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "grey"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Ritalin", color: "blue"},
-                {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Seroquel", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Ritalin", color: "blue"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 2, contents: "Seroquel", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 3, contents: "Supplements", color: "green"},
 
                 {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "grey"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Risperdal", color: "orange"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Ritalin", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Risperdal", color: "orange"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Ritalin", color: "blue"},
                 {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Prozac", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 3, contents: "Supplements", color: "green"},
                 // {x: convertDateToTimestamp("2009-05-01"), y: 4, contents: "Seroquel", color: "green"},
                 // hidden because of too much data
 
@@ -223,6 +272,8 @@ var  medCV = function () {
                 {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "orange"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "green"},
                 // {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Other", color: "tan"}
+
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Supplements", color: "green"},
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");

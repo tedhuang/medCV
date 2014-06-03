@@ -112,3 +112,13 @@ body {
   border-bottom-right-radius: 3px;
   font-size: 1.1em;
 }
+
+
+/* hacking things to line up */
+.medication .overview {
+  margin-left: 12px
+}
+
+#diag-overview {
+  margin-left: 23px
+}
