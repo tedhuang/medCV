@@ -192,6 +192,7 @@ var  medCV = function () {
         $.each(sleep_detailed, function(i, d){
             drawDoubleLineGraph(d);
         });
+        d3.select(".sleep .detailed").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
     }
 
     function drawTimeline(){

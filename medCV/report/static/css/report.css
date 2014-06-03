@@ -3,7 +3,7 @@ body {
   background: #fcfcfc;
   background-image: url('../images/stripe-bg.png');
   background-size: 25.5%;
-  
+
 }
 .navbar{
   margin-bottom: 0px;
@@ -42,7 +42,7 @@ body {
 
 
 .chart.EXPANDED{
-  height: 500px;
+  height: 530px;
   webkit-transition:all 0.2s ease-in-out;
   -moz-transition:all 0.2s ease-in-out;
   -o-transition:all 0.2s ease-in-out;
@@ -100,7 +100,7 @@ body {
 
 }
 
-#diag1 .sub-category-label, 
+#diag1 .sub-category-label,
 #diag2 .sub-category-label{
   left: -23px;
   top: -1px;
