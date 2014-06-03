@@ -125,11 +125,16 @@ var  medCV = function () {
             .margin({top: 0, bottom: 0, left: 0, right: 0})
             .stack();
 
+<<<<<<< Updated upstream
         d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
         $.each(sleep_detailed, function(i, d){
             console.log("d: "+JSON.stringify(d));
             drawDoubleLineGraph(d);
         });
+=======
+        graphWidth = $("#diag-overview").parents(".graph").width() - 40
+        d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
+>>>>>>> Stashed changes
     }
 
     function drawTimeline(){
@@ -199,7 +204,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -240,7 +246,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -304,7 +311,8 @@ var  medCV = function () {
                 axisLabelUseCanvas: true,
                 axisLabelFontSizePixels: 12,
                 axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-                axisLabelPadding: 5
+                axisLabelPadding: 5,
+                show: false
             },
             series: {
                 lines: {
@@ -429,15 +437,15 @@ var  medCV = function () {
         // $(".category-label.swappable").on('click', function(){
         //     $(this).siblings(".graph").find(".overview").toggle();
         //     $(this).siblings(".graph").find(".detailed").toggle();
-
         //     var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
         //     //$(".medication > .graph > .overview").html("");
         //     drawNoteGraph("medication", med);
         // });
+        });
 
-
-
+        /* *********************** */
         /* annotation related code */
+        /* *********************** */
         var annotation = {
             'items' : []
         };
@@ -472,6 +480,7 @@ var  medCV = function () {
 
         $("#saveAnnotation").on('click', function(){
             if (annotationCreator.positionSaved) {
+                var annotation_id =  Math.random().toString(36).substr(2,5);
 
                 var content = $(".anno-create-container").find("textarea").val()
 
@@ -482,6 +491,7 @@ var  medCV = function () {
                 console.log(annotation.items)
 
                 var newAnnotation = {
+                    'id' : 'anno-' +  annotation_id,
                     'content' : content,
                     'left' : $(".drag-line").css("left"),
                     'top' : $(".anno-create-container").css("top"),

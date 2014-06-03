@@ -3,10 +3,20 @@
 
 {% block page_body %}
 
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">MedCV</a>
+        </div>
+        <div class="nav navbar-nav annotations-control pull-right">
+            <button class="btn btn-default" id="toggleAnnotationCreator">
+              Add Annotations
+            </button>
+            <button class="btn btn-default" id="hideAnnotation">
+              Hide Annotations
+            </button>
+            <button class="btn btn-default" id="clearAnnotation">
+              Clear All
         </div>
     </div>
 </div>
@@ -86,18 +96,6 @@
       </div>
       <div class="events"></div>
       <div class="timeline"></div>
-
-      <div class="annotations-control">
-          <button class="btn btn-default" id="hideAnnotation">
-            Hide Annotations
-          </button>
-          <button class="btn btn-default" id="toggleAnnotationCreator">
-            Add Annotations
-          </button>
-          <button class="btn btn-default" id="clearAnnotation">
-            Clear All
-          </button>
-      </div>
     </div>
 </div>
 
