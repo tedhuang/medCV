@@ -59,8 +59,6 @@ var  medCV = function () {
         ];
 
 
-        var drug_data = [
-        ];
 
         var diagnosis_data = [
           {label: "Gross Motor Skills", times: [
@@ -103,6 +101,7 @@ var  medCV = function () {
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
         drawNoteGraph("medication", med);
+        drawFamilyGraph("family", med);
         drawTimeline();
 
         var chart = d3.timeline()
@@ -207,6 +206,77 @@ var  medCV = function () {
             }
         };
         var plot = $("."+placeholder+" > .graph > .overview").plot(data, options).data("plot");
+
+    }
+
+    function drawFamilyGraph(placeholder, rawData) {
+        var options ={
+          xaxis: {
+                min: minTime,
+                max: maxTime,
+                mode: "time",
+                tickSize: [1, "year"],
+                tickLength: 0,
+                axisLabel: 'Month',
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            yaxis: {
+                min: 0,
+                max: 6,
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: true,
+                    steps: true
+                }
+            },
+            grid: {
+                borderWidth: 1
+            },
+            legend: {
+                labelBoxBorderColor: "none",
+                position: "left"
+            },
+            comment: {
+                show: true
+            },
+            comments: [
+                {x: convertDateToTimestamp("1999-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("1999-05-01"), y: 1, contents: "Herbs", color: "green"},
+
+                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Herbs", color: "green"},
+
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Herbs", color: "green"},
+
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Herbs", color: "green"},
+
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Herbs", color: "green"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Difficulties Related to Child's Disability", color: "black"},
+
+
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Herbs", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Community", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Medication", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 4, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 5, contents: "Relationship Difficulties", color: "black"},
+            ]
+        }
+        var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
+
+        // hack all the titles
 
     }
 

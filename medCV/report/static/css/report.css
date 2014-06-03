@@ -115,7 +115,7 @@ body {
 
 
 /* hacking things to line up */
-.medication .overview {
+.medication .overview, .family .overview {
   margin-left: 12px
 }
 
