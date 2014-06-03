@@ -15,7 +15,6 @@ var  medCV = function () {
     $(window).resize(function() {
         viewportWidth = $(window).width();
         viewportHeight = $(window).height();
-        console.log("resize: "+viewportWidth);
         $(".graph").width(viewportWidth-labelWidth-5);
         $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
     });
@@ -128,7 +127,6 @@ var  medCV = function () {
 		graphWidth = $("#diag-overview").parents(".graph").width() - 40
         d3.select("#diag-overview").append("svg").attr("width", graphWidth).datum(diagnosis_data).call(chart);
         $.each(sleep_detailed, function(i, d){
-            console.log("d: "+JSON.stringify(d));
             drawDoubleLineGraph(d);
         });
     }
@@ -437,7 +435,7 @@ var  medCV = function () {
         //     //$(".medication > .graph > .overview").html("");
         //     drawNoteGraph("medication", med);
         // });
-        });
+
 
         /* *********************** */
         /* annotation related code */
@@ -484,8 +482,6 @@ var  medCV = function () {
                     content = "Missing content";
                 }
 
-                console.log(annotation.items)
-
                 var newAnnotation = {
                     'id' : 'anno-' +  annotation_id,
                     'content' : content,
@@ -494,8 +490,6 @@ var  medCV = function () {
                 };
 
                 annotation.items.push(newAnnotation);
-
-                console.log(annotation.items)
 
                 if ( typeof(Storage) !== 'undefined') { // save in local storage
                     localStorage.annotations = JSON.stringify(annotation.items);

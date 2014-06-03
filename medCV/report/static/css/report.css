@@ -121,11 +121,12 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   padding: 3px 8px;
   color: #fff;
   border-bottom-right-radius: 3px;
   font-size: 1.1em;
+  z-index: 10;
 }
 
 
