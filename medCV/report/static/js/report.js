@@ -17,12 +17,14 @@ var  medCV = function () {
         viewportHeight = $(window).height();
         console.log("resize: "+viewportWidth);
         $(".graph").width(viewportWidth-labelWidth-5);
+        $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
     });
 
 
     function initialize(){
 
         $(".graph").width(viewportWidth-labelWidth-5); //set graph width
+        $(".detail-chart").width(viewportWidth-labelWidth-5); //set graph width
 
         //TODO: load data
 
@@ -32,26 +34,31 @@ var  medCV = function () {
         var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
 
         var sleep_detailed = [{
+                className: "bedtime",
                 name: "Difficulty Falling Asleep in Evening",
                 frequency: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]],
                 severity: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]]
             },
             {
+                className: "sleepiness",
                 name: "Sleepiness during day",
                 frequency: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 3], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 3]]
             },
             {
+                className: "awakenings",
                 name: "Awakenings",
                 frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 4], ["2012-05-01", 3]]
             },
             {
+                className: "timing",
                 name: "Timing : How irregular is your child's sleep?",
-                // frequency: (?)[["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
+                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
                 severity: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]]
             },
             {
+                className: "breathing",
                 name: "Breathing: how much of a problem?",
                 frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2]],
                 severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3]]
@@ -119,6 +126,10 @@ var  medCV = function () {
             .stack();
 
         d3.select("#diag-overview").append("svg").attr("width", 1091).datum(diagnosis_data).call(chart);
+        $.each(sleep_detailed, function(i, d){
+            console.log("d: "+JSON.stringify(d));
+            drawDoubleLineGraph(d);
+        });
     }
 
     function drawTimeline(){
@@ -341,6 +352,65 @@ var  medCV = function () {
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
     }
 
+    function drawDoubleLineGraph(data){
+        var placeholder = data.className;
+        var rawData = data["frequency"];
+        var rawData2 = data["severity"];
+        var min = rawData[0][0];
+        var max = rawData[rawData.length-1][0];
+        $.each(rawData, function(i, data){
+            data[0] = convertDateToTimestamp(data[0]);
+        });
+        $.each(rawData2, function(i, data){
+            data[0] = convertDateToTimestamp(data[0]);
+        });
+
+        var options ={
+          xaxis: {
+                min: convertDateToTimestamp(min),
+                max: convertDateToTimestamp(max),
+                mode: "time",
+                tickSize: [1, "year"],
+                show:false,
+                tickLength: 0,
+                axisLabel: 'Month',
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            yaxis: {
+                show:false,
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
+                axisLabelPadding: 5
+            },
+            series: {
+                lines: {
+                    show: true,
+                    fill: false,
+                    steps: true
+                }
+            },
+            grid: {
+                borderWidth: 1
+            },
+            legend: {
+                labelBoxBorderColor: "none",
+                position: "left"
+            }
+        };
+        var plot = $.plot("."+placeholder, [], options);
+
+        plot.setData( [
+            { label: "frequency", data: rawData, color: '#4572A7' },
+            { label: "severity", data: rawData2,color: '#792dcc' }
+        ]);
+        plot.setupGrid();
+        plot.draw();
+    }
+
     function convertDateToTimestamp(myDate){
         myDate=myDate.split("-");
         var newDate=myDate[1]+"/"+myDate[2]+"/"+myDate[0];//month/date year
@@ -356,14 +426,14 @@ var  medCV = function () {
             $(this).siblings(".graph").find(".detailed").toggle();
 
         });
-        $(".category-label.swappable").on('click', function(){
-            $(this).siblings(".graph").find(".overview").toggle();
-            $(this).siblings(".graph").find(".detailed").toggle();
+        // $(".category-label.swappable").on('click', function(){
+        //     $(this).siblings(".graph").find(".overview").toggle();
+        //     $(this).siblings(".graph").find(".detailed").toggle();
 
-            var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
-            //$(".medication > .graph > .overview").html("");
-            drawNoteGraph("medication", med);
-        });
+        //     var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
+        //     //$(".medication > .graph > .overview").html("");
+        //     drawNoteGraph("medication", med);
+        // });
 
 
 
