@@ -20,19 +20,44 @@ var  medCV = function () {
         //TODO: load data
 
         //graph
-        var sleep =[["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84]];
+        var sleep = [["1999-05-01", 14], ["2004-05-01", 30], ["2007-05-01", 45], ["2009-05-01", 84], ["2012-05-01", 84]];
 
         var med =[["1999-05-01", 0], ["2004-05-01", 1], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 1]];
 
+        var sleep_detailed = [{
+                name: "Difficulty Falling Asleep in Evening",
+                frequency: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]],
+                severity: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 3]]
+            },
+            {
+                name: "Sleepiness during day",
+                frequency: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]],
+                severity: [["1999-05-01", 3], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 3]]
+            },
+            {
+                name: "Awakenings",
+                frequency: [["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
+                severity: [["1999-05-01", 2], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 4], ["2012-05-01", 3]]
+            },
+            {
+                name: "Timing : How irregular is your child's sleep?",
+                // frequency: (?)[["1999-05-01", 4], ["2004-05-01", 3], ["2007-05-01", 3], ["2009-05-01", 3], ["2012-05-01", 4]],
+                severity: [["1999-05-01", 4], ["2004-05-01", 4], ["2007-05-01", 4], ["2009-05-01", 4], ["2012-05-01", 4]]
+            },
+            {
+                name: "Breathing: how much of a problem?",
+                frequency: [["1999-05-01", 2], ["2004-05-01", 2], ["2007-05-01", 2], ["2009-05-01", 2], ["2012-05-01", 2]],
+                severity: [["1999-05-01", 1], ["2004-05-01", 1], ["2007-05-01", 2], ["2009-05-01", 3], ["2012-05-01", 3]]
+            }
+        ];
+
         drawGraph("sleep", sleep);
         drawGraph("medication", med);
-
 
         // var med_taken = [["1999-05-01", "Foo"], ["1999-05-01", "Bar"], ["1999-05-01", "Baz"]
         //                  ["2004-05-01", "Ruffle"],
         //                  ["2009-05-01", "Rack"],
         //                  ["2012-05-01", "Rackspace"], ["2012-05-01", "Jingle"]];
-        // drawNoteGraph("medication", med);
     }
 
     function drawGraph(placeholder, rawData){
@@ -87,7 +112,7 @@ var  medCV = function () {
         var min = rawData[0][0];
         var options ={
           xaxis: {
-                min: convertDateToTimestamp(min),
+                min: convertDateToTimestamp("1999-05-01"),
                 max: (new Date(2013, 11, 1)).getTime(),
                 mode: "time",
                 tickSize: [1, "year"],
@@ -125,10 +150,12 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("2003-02-01"), y: 1, contents: "Foo", color: "blue"},
-                {x: convertDateToTimestamp("2003-02-01"), y: 2, contents: "Foo", color: "blue"},
-                {x: convertDateToTimestamp("2004-02-01"), y: 1, contents: "Foo", color: "green"},
-                {x: convertDateToTimestamp("2006-02-01"), y: 1, contents: "Foo", color: "blue"}
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Catapres", color: "grey"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Abilify", color: "blue"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Concerta", color: "orange"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Lamictal", color: "green"}
             ]
         }
         var plot = $("."+placeholder+" > .graph > .overview").plot(rawData, options).data("plot");
@@ -142,7 +169,7 @@ var  medCV = function () {
 
     $(function() {
         initialize();
-        
+
         $(document).ready(function(){
             $(".category-label.expandable").on('click', function(){
                 $(this).parents(".chart").toggleClass("EXPANDED");
@@ -153,7 +180,7 @@ var  medCV = function () {
                 $(this).siblings(".graph").find(".overview").toggle();
                 $(this).siblings(".graph").find(".detailed").toggle();
             });
-            
+
         });
 
     });
