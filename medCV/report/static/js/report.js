@@ -126,7 +126,7 @@ var  medCV = function () {
 
         // drawGraph("sleep", sleep);
         graphWidth = $("#diag-overview").parents(".graph").width() - 40
-        
+
         drawGraph("medication", med);
         d3.select(".medication .graph").append("svg").attr("width", graphWidth).attr("height", 30).style("margin-left", 24).datum([]).call(timeline_axis);
         drawNoteGraph("medication", med);
@@ -326,21 +326,21 @@ var  medCV = function () {
                 show: true
             },
             comments: [
-                {x: convertDateToTimestamp("1999-06-10"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("1999-07-05"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("1999-08-25"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2004-05-01"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("2004-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Other Family", color: "green"},
+                {x: convertDateToTimestamp("2007-05-01"), y: 0, contents: "Family Support", color: "green"},
                 {x: convertDateToTimestamp("2007-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
 
-                {x: convertDateToTimestamp("2009-05-01"), y: 0, contents: "Strong family bonds", color: "blue"},
-                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 1, contents: "Strong family bonds", color: "blue"},
+                {x: convertDateToTimestamp("2009-05-01"), y: 2, contents: "Difficulties Related to Child's Disability", color: "black"},
 
 
-                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Community Organization", color: "green"},
-                {x: convertDateToTimestamp("2012-05-01"), y: 1, contents: "Difficulties Related to Child's Disability", color: "black"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 0, contents: "Community Support", color: "green"},
+                {x: convertDateToTimestamp("2012-05-01"), y: 3, contents: "Difficulties Related to Child's Disability", color: "black"},
                 {x: convertDateToTimestamp("2012-05-01"), y: 2, contents: "Relationship Difficulties in my family", color: "black"},
             ]
         }
@@ -600,7 +600,7 @@ var  medCV = function () {
 
         $(document).on('click', ".removeAnnotation", function() {
             var self = $(this).parents("li");
-            
+
             for(var i=0; i<annotation.items.length; i++){
                 if(self.attr('id') == annotation.items[i].id){
                     annotation.items.splice(i, 1)
