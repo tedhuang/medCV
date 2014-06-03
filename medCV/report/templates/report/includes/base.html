@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+		<link rel="stylesheet" href="{{STATIC_URL}}/libs/vis/vis.css" />
 
 		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}/css/report.css">
 		{% block page_head %}{% endblock %}
@@ -32,6 +33,7 @@
 
 
 		<!-- Internal JS -->
+		<script src="{{STATIC_URL}}/libs/vis/vis.js"></script>
 		<script src="{{STATIC_URL}}/libs/flot/jquery.flot.js"></script>
 		<script src="{{STATIC_URL}}/libs/flot/jquery.flot.time.js"></script>
 		<script src="{{STATIC_URL}}/libs/flot/jquery.flot.comments.js"></script>
