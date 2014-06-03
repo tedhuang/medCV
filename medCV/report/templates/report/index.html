@@ -2,6 +2,7 @@
 
 
 {% block page_body %}
+
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -11,27 +12,74 @@
 </div>
 
 <div id="main-container" class="sidebar-closed">
-    <div id="charts">
-
+    <div id="charts-container">
         <div class="sleep chart">
           <div class="category-label">Sleep</div>
-          <div class="graph"></div>
+          <div class="graph">
+            <div class="overview">shown</div>
+            <div class="detailed">
+
+              <div class="sub-category-item">
+                <div class="sub-category-graph">
+                  <span class="sub-category-label">Bedtime</span>
+                  <img src="//placehold.it/800x150" />
+                </div>
+              </div>
+              <div class="sub-category-item">
+                <div class="sub-category-graph">
+                  <span class="sub-category-label">Sleepiness</span>
+                  <img src="//placehold.it/800x150" />
+                </div>
+              </div>
+              <div class="sub-category-item">
+                <div class="sub-category-graph">
+                  <span class="sub-category-label">Awakenings</span>
+                  <img src="//placehold.it/800x150" />
+                </div>
+              </div>
+              <div class="sub-category-item">
+                <div class="sub-category-graph">
+                  <span class="sub-category-label">Timing</span>
+                  <img src="//placehold.it/800x150" />
+                </div>
+              </div>
+              <div class="sub-category-item">
+                <div class="sub-category-graph">
+                  <span class="sub-category-label">Breaking</span>
+                  <img src="//placehold.it/800x150" />
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
         <div class="medication chart">
           <div class="category-label">Med</div>
-          <div class="graph"></div>
+          <div class="graph">
+            <div class="overview"></div>
+            <div class="detailed"></div>
+          </div>
         </div>
         <div class="diagnoses chart">
           <div class="category-label">Diagnoses</div>
-          <div class="graph"></div>
+          <div class="graph">
+            <div class="overview"></div>
+            <div class="detailed"></div>
+          </div>
         </div>
         <div class="family chart">
           <div class="category-label">Family</div>
-          <div class="graph"></div>
+          <div class="graph">
+            <div class="overview"></div>
+            <div class="detailed"></div>
+          </div>
         </div>
     </div>
+
     <div class="info">
-      <div class="category-label">Info</div>
+      <div class="category-label">
+        <span>Info</span>
+      </div>
       <div class="timeline"></div>
       <div class="events"></div>
     </div>
